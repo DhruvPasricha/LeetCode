@@ -1,22 +1,19 @@
 class Solution {
-int dp[1000][1000];
+int dp[1000];
 public:
     
-    int solve(int pos, int target, vector<int>&nums){
+    int solve(int target, vector<int>&nums){
         
-        if(target == 0){
-            return 1;
-        }
+        if(target == 0) return 1;
         
-        int &ans = dp[pos][target];
+        int &ans = dp[target];
         if(ans != -1) return ans;
+        
         ans = 0;
         
         for(int &x : nums){
-            if(x > target){
-                break;
-            }
-            ans += solve(pos + 1, target - x, nums);
+            if(x > target) return ans;
+            ans += solve(target - x, nums);
         }
         
         return ans;
@@ -28,7 +25,7 @@ public:
         
         sort(nums.begin(), nums.end());
         memset(dp, -1, sizeof(dp));
-        int ans = solve(0, target, nums);
+        int ans = solve(target, nums);
         return ans;
     }
 };
