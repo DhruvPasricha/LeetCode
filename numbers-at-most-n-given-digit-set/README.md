@@ -1,3 +1,4 @@
+[Discussion Post (created on 18/11/2021 at 8:52)](https://leetcode.com/problems/numbers-at-most-n-given-digit-set/discuss/1633426/C%2B%2B-Digit-DP-Memoization-Solution)  
 <h2>902. Numbers At Most N Given Digit Set</h2><h3>Hard</h3><hr><div><p>Given an array of <code>digits</code> which is sorted in <strong>non-decreasing</strong> order. You can write numbers using each <code>digits[i]</code> as many times as we want. For example, if <code>digits = ['1','3','5']</code>, we may write numbers such as <code>'13'</code>, <code>'551'</code>, and <code>'1351315'</code>.</p>
 
 <p>Return <em>the number of positive integers that can be generated </em>that are less than or equal to a given integer <code>n</code>.</p>
