@@ -1,5 +1,5 @@
 class Solution { 
-    
+    // works only when matrix[i][j] is not too big
     void solve1(vector<vector<int>> &matrix){
          int n = matrix.size();
         
