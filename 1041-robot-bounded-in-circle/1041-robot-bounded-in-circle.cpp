@@ -4,7 +4,6 @@ class Solution {
         return x*x + y*y <= 2000;
     }
     
-    
     bool good(int op, string &s) {
         
         int n = s.size();
@@ -48,9 +47,9 @@ public:
             
             int m = (l + r) >> 1;
             if(good(l, instructions)) l = m;
-            else r = m;
+            else return false;
         }
         
-        return r == 1e3;
+        return true;
     }
 };
