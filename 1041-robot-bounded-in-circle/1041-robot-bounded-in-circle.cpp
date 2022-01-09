@@ -42,7 +42,7 @@ public:
     bool isRobotBounded(string instructions) {
         
         int l = 0;
-        int r = 1e5;
+        int r = 1e3;
         
         while(r - l > 1) {
             
@@ -50,6 +50,7 @@ public:
             if(good(l, instructions)) l = m;
             else r = m;
         }
-        return r == 1e5;
+        
+        return r == 1e3;
     }
 };
