@@ -1,6 +1,7 @@
 class Solution {
-public:
-    bool increasingTriplet(vector<int>& nums) {
+    
+    
+    bool solve(vector<int> &nums) {
         
         int n = nums.size();
         int prefixMin = nums[0];
@@ -19,8 +20,25 @@ public:
         return false;
         
     }
+    
+public:
+    bool increasingTriplet(vector<int>& nums) {
+        
+        vector<int> LIS;
+        
+        for(auto &x : nums) {
+            
+            if(LIS.size() == 0 or LIS.back() < x) {
+                LIS.push_back(x);
+            } else {
+                auto itr = lower_bound(LIS.begin(), LIS.end(), x);
+                *itr = x;
+            }
+            
+            if(LIS.size() == 3) return true;
+        }
+        return false;
+    }
 };
 
-// Time : O(N)
-// Space : O(N)
- 
+  
