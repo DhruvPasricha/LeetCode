@@ -1,12 +1,10 @@
 class Solution {
     
-    bool possible(vector<int> &A, int idx) {
-        int prev = INT_MIN;
+    bool possible(vector<int> &A, int prev, int idx) {
         int n = A.size();
-        for(int i = 0;i < n;i++) {
-            if(i == idx) continue;
-            if(A[i] <= prev) return false;
-            prev = A[i];
+        while(idx < n) {
+            if(A[idx] <= prev) return false;
+            prev = A[idx++];
         }
         return true;
     }
@@ -20,11 +18,28 @@ public:
         for(int i = 1;i < n;i++) {
             
             if(nums[i] <= nums[i - 1]) {
-                choice1 = i - 1;
-                choice2 = i;
-                break;
+               
+                // i will be removed or i - 1 will be removed
+                int prev = (i - 2 >= 0) ? nums[i - 2] : INT_MIN;
+                int next = (i + 1 < n) ? nums[i + 1] : INT_MAX;
+                
+                // can remove i ?
+                if(prev < nums[i - 1] and nums[i - 1] < next)
+                    return possible(nums, next, i + 2);
+                // can remove i - 1 ?
+                else if(prev < nums[i] and nums[i] < next)
+                    return possible(nums, next, i + 2);
+                else
+                    return false;
             }
         }
-        return possible(nums, choice1) or possible(nums, choice2);
+        return true;
     }
 };
+
+// 2 3 1 4 5 6
+//     x
+
+// 1 2 1000 3 4 5
+//       x
+
