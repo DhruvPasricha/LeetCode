@@ -32,7 +32,7 @@ public:
         int ans = 0;
         for(int i = 0;i < n;i++) {
             
-            vector<int> current = points[i];
+            auto &current = points[i];
             int j  = i + 1;
             
             while(j < n and intersecting(current, points[j])) j++;
