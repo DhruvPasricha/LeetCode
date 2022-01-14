@@ -26,7 +26,7 @@ public:
             i++;
     
         while(i <  n and isDigit(s[i])) { 
-            if(ans > inf) break;
+            if(ans >= inf) break;
             ans = ans * 10 + (s[i] - '0');
             i++;
         }
