@@ -20,6 +20,7 @@ public:
         for(int i = 0;i < n;i++) {
             
             if(seats[i] == i){ 
+                seats[i] = 1;
                 prev = i;
                 continue;
             }
@@ -27,6 +28,8 @@ public:
             int r = seats[i] - i;
             
             ans = max(ans, min(l, r));
+            
+            seats[i] = 0;
         }
         return ans;
     }
