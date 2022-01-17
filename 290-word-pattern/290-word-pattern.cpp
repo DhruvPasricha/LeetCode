@@ -3,7 +3,7 @@ public:
     bool wordPattern(string pattern, string s) {
         
         unordered_map<string, char> mp;
-        unordered_set<char> visited;
+        vector<bool> visited(26, false);
         
         int n = s.length();
         int m = pattern.length();
@@ -21,13 +21,13 @@ public:
             
             if(mp.count(current)) {
                 if(j >= m or mp[current] != pattern[j]) return false;
-            } else if(visited.count(pattern[j])){
+            } else if(visited[pattern[j] - 'a']){
                 return false;
             } else {
                 mp[current] = pattern[j];
             }
             
-            visited.insert(pattern[j]);
+            visited[pattern[j] - 'a'] = true;
         }
         return j == m;
     }
