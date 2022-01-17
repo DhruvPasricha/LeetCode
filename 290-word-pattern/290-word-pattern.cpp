@@ -2,13 +2,14 @@ class Solution {
 public:
     bool wordPattern(string pattern, string s) {
         
-        map<string, char> mp;
-        set<char> visited;
+        unordered_map<string, char> mp;
+        unordered_set<char> visited;
         
         int n = s.length();
         int m = pattern.length();
         
         int j = 0;
+        
         for(int i = 0;i < n;i++, j++) {
             
             string current = "";
