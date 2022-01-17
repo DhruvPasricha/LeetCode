@@ -1,9 +1,32 @@
 class Solution {
-public:
-    bool wordPattern(string pattern, string s) {
+    
+    unordered_map<string, char> mp;
+    vector<bool> visited;
+    
+    
+    bool check(const string &currentString, const char &currentChar) {
         
-        unordered_map<string, char> mp;
-        vector<bool> visited(26, false);
+        if(mp.count(currentString)) {
+            if(mp[currentString] != currentChar) return false;
+        } else if(visited[currentChar - 'a']){
+            return false;
+        } else {
+            mp[currentString] = currentChar;
+        }
+            
+        visited[currentChar - 'a'] = true;
+        
+        return true;
+    }
+    
+    
+public:
+    
+    Solution() {
+        visited.assign(26, false);    
+    }
+    
+    bool wordPattern(string pattern, string s) {
         
         int n = s.length();
         int m = pattern.length();
@@ -18,16 +41,10 @@ public:
                 current += s[i];
                 i++;
             }
+                        
+            bool ok = j < m and check(current, pattern[j]);
             
-            if(mp.count(current)) {
-                if(j >= m or mp[current] != pattern[j]) return false;
-            } else if(visited[pattern[j] - 'a']){
-                return false;
-            } else {
-                mp[current] = pattern[j];
-            }
-            
-            visited[pattern[j] - 'a'] = true;
+            if(not ok) return false;
         }
         return j == m;
     }
