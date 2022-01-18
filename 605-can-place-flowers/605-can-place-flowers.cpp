@@ -12,8 +12,9 @@ public:
             i++;
         }
         
-        if(i == n) mx += ((count + 1) >> 1);
-        else mx += (count >> 1);
+        if(i == n) count++;
+        
+        mx += (count >> 1);
         
         while(i < n) {
             
