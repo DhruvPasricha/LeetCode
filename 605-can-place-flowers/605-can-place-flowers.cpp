@@ -5,21 +5,12 @@ public:
         int n = flowerbed.size();
         
         int mx = 0;
-        int count = 0;
-        
-        while(i < n and flowerbed[i] == 0) {
-            count++;
-            i++;
-        }
-        
-        if(i == n) count++;
-        
-        mx += (count >> 1);
         
         while(i < n) {
             
-            count = 0;
-            i++;
+            int count = (i == 0 and flowerbed[i] == 0);
+            
+            if(flowerbed[i] == 1) i++;
             
             while(i < n and flowerbed[i] == 0) {
                 count++;
