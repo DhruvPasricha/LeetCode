@@ -9,10 +9,11 @@ class Solution {
         int hoursReq = 0;
         
         for(int &pile : piles) {
-            hoursReq += Ceil(pile, k);    
+            hoursReq += Ceil(pile, k);
+            if(hoursReq > h) return false;
         }
         
-        return hoursReq <= h;
+        return true;
     }
     
     
