@@ -1,8 +1,6 @@
 class Solution {
     
-    inline int Ceil(int num, int den)  {
-        return (num / den) + (num % den != 0);
-    }
+    #define Ceil(num, den) ((num / den) + (num % den != 0))
 
     bool good(vector<int> &piles, int k, int h)  {
         
