@@ -1,6 +1,5 @@
 class Solution {
     
-    vector<int> prefix, prefixMin, suffixMin;
     int mod = 1e4 + 1;
     
     int init(vector<int> &gas, vector<int> &cost) {
