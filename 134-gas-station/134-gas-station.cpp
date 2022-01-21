@@ -28,19 +28,21 @@ public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
       
         init(gas, cost);
+        
         int n = gas.size();
         
-        if(prefixMin[n - 1] >= 0) return 0;
-        
-        for(int i = 1;i < n;i++) {
+        for(int i = 0; i < n; i++) {
             
-            int rightExtra = prefix[i - 1];  
+            int rightExtra = (i == 0) ? 0 : prefix[i - 1];  
             int leftRemaining = prefix[n - 1] - rightExtra; 
             
-            int leftMin = prefixMin[i - 1] + leftRemaining;
+            int leftMin = (i == 0) ? 0 : prefixMin[i - 1] + leftRemaining;
             int rightMin = suffixMin[i] - rightExtra;
             
-            if(leftMin >= 0 and rightMin >= 0) return i;
+            int pathMin = min(leftMin, rightMin);
+            
+            if(pathMin >= 0) 
+                return i;
         }
         
         return -1;
