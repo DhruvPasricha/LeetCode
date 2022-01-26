@@ -12,15 +12,13 @@ class Solution {
         while(i < n or j < m) {
             int option1 = (i < n) ? A[i] : INT_MAX;
             int option2 = (j < m) ? B[j] : INT_MAX;
-            Ans[i + j] = (option1 <= option2) ? option1 : option2;
-            i += (option1 <= option2);
-            j += (option2 < option1);
+            
+            if(option1 <= option2)
+                Ans[i + j] = option1, i++;
+            else
+                Ans[i + j] = option2, j++;
         } 
-        
-        
     }
-    
-    
     
     void getInorder(TreeNode* root, vector<int> &Ans) {
         
