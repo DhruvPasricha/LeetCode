@@ -35,9 +35,12 @@ public:
         Node *current = root;
         
         for(int i = 30;i >= 0;i--) {
+            
             int bit = (n & (1 << i));
+            
             bit = min(1, bit);
-            if(!current->hasChild(bit)) {
+            
+            if(not current->hasChild(bit)) {
                 current->insertChild(bit);
             }
             
