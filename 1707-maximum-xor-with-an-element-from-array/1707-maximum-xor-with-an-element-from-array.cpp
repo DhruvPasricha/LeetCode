@@ -11,7 +11,7 @@ class TrieNode {
         return children[ch] != 0;
     }
     
-    TrieNode *getChild(int ch) {
+    TrieNode* getChild(int ch) {
         
         if(children[ch] == NULL)
             children[ch] = new TrieNode();
@@ -22,14 +22,6 @@ class TrieNode {
     TrieNode() {
         children[0] = children[1] = 0;
     }
-    
-    // ~TrieNode() {
-    //     for(int i = 0;i < 2;i++) {
-    //         if(children[i] != 0) {
-    //             delete children[i];
-    //         }
-    //     }
-    // }
 };
 
 
@@ -74,10 +66,6 @@ public:
         
         return ans;
     }
-    
-    // ~Trie() {
-    //     delete root;
-    // }
 };
 
 // Solution
@@ -103,8 +91,12 @@ class Solution {
     }
     
 public:
-    vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& q) {
+    
+    Solution() {
         cin.tie(nullptr)->sync_with_stdio(false);
+    }
+    
+    vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& q) {
        
         init(q);
         Trie t;        
