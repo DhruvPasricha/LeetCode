@@ -1,5 +1,5 @@
 class Solution {
-    map<TreeNode*, int> dp[2][2];
+    unordered_map<TreeNode*, int> dp[2][2];
     
     int64_t solve(TreeNode* root, bool mandatory, bool covered) {
         
