@@ -1,72 +1,26 @@
 class Solution {
     
-    vector<int> nextSmallerLeft, nextSmallerRight;
-    
-    void preCompute(vector<int> &heights) {
+    int solve(vector<int> &heights, int l, int r) {
         
-        int n = heights.size();
-        stack<int> st;
+        if(l > r) 
+            return 0;
         
-        // left
-        nextSmallerLeft.assign(n, -1);
-        for(int i = 0;i < n;i++) {
-            
-            while(st.size() > 0 and heights[st.top()] >= heights[i]) {
-                st.pop();
-            }
-            
-            if(st.size() > 0) {
-                nextSmallerLeft[i] = st.top();
-            }
-            
-            st.push(i);
-        }
+        auto minIndex = min_element(heights.begin() + l, heights.begin() + r + 1) - heights.begin();
+        auto maxIndex = max_element(heights.begin() + l, heights.begin() + r + 1) - heights.begin();
         
-        // resetting the stack
-        while(st.size() > 0) {
-            st.pop();
-        }
+        int width = r - l + 1;
+        int height = heights[minIndex];
+        int currentAns = width * height;
         
-        // right
-        nextSmallerRight.assign(n, n);
-        for(int i = n - 1;i >= 0;i--) {
-            
-            while(st.size() > 0 and heights[st.top()] >= heights[i]) {
-                st.pop();
-            }
-            
-            if(st.size() > 0) {
-                nextSmallerRight[i] = st.top();
-            }
-            
-            st.push(i);
-        }
+        if(heights[minIndex] == heights[maxIndex])
+            return currentAns;
+        
+        return max({currentAns, solve(heights, l, minIndex - 1), solve(heights, minIndex + 1, r)});
+        
     }
-    
-    
-    int getLeftStrechCount(vector<int> &height, int x) {
-		return x - nextSmallerLeft[x] - 1;
-	}
-	
-	int getRightStrechCount(vector<int> &height, int x) {
-        return nextSmallerRight[x] - x - 1;
-	}	
-	
-
-	int solve(vector<int> &heights) {
-		int n = heights.size();
-		int ans = 0;
-		for(int i = 0;i < n;i++) {
-			int height = heights[i];
-			int width = 1 + getLeftStrechCount(heights, i) + getRightStrechCount(heights, i);
-            ans = max(ans, height * width);	
-		}
-		return ans;
-	}
     
 public:
     int largestRectangleArea(vector<int>& heights) {
-        preCompute(heights);
-        return solve(heights);
-    }   
+        return solve(heights, 0, (int)heights.size() - 1);
+    }
 };
