@@ -2,8 +2,10 @@ class Solution {
 
      function insert(&$x, &$head, &$tail) {
         
-        if($head == null) $head = $x;
-        else $tail->next = $x;
+        if($head == null) 
+            $head = $x;
+        else 
+            $tail->next = $x;
         
         $tail = $x;
         $x = $x->next;
@@ -18,8 +20,10 @@ class Solution {
         $tail = null;
         
         while($list1 and $list2) {
-            if($list1->val <= $list2->val) Solution::insert($list1, $head, $tail);
-            else Solution::insert($list2, $head, $tail);
+            if($list1->val <= $list2->val) 
+                Solution::insert($list1, $head, $tail);
+            else 
+                Solution::insert($list2, $head, $tail);
         }
         
         if($list1 == null) $tail->next = $list2;
