@@ -13,10 +13,12 @@ class Solution {
     }
     
     
-    bool possible(int sum, int k, set<int> A[], set<int> B[]) {
+    bool possible(int sum, int k, set<int> A[], int size1, set<int> B[], int size2) {
         
         for(int k1 = 0; k1 <= k; k1++) {
+            if(k1 >= size1) break;
             int k2 = k - k1;   
+            if(k2 >= size2) continue;
             for(int a : A[k1]) {
                 if(B[k2].count(sum - a))
                     return true;
@@ -40,9 +42,9 @@ public:
             t += num;
         
         
-        set<int> A[31];
-        set<int> B[31];
-        
+        set<int> A[m + 2];
+        set<int> B[n - m];
+    
         solve(nums, 0, m + 1, 0, 0, A);
         solve(nums, m + 1, n, 0, 0, B);
         
@@ -53,7 +55,7 @@ public:
             
             int s = (t * k) / n;
             
-            if(possible(s, k, A, B))
+            if(possible(s, k, A, m + 2, B, n - m))
                 return true;
         }
         
