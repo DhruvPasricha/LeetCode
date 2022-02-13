@@ -15,7 +15,6 @@ public:
         sort(a.begin(), a.end());
         sort(b.begin(), b.end());
         
-        
         int i = N - 1;
         int j = M - 1;
         
@@ -41,56 +40,34 @@ public:
                 
                 while(j >=  0 and b[j] == cur)
                     j--, c2++;
-                    
+                
+                int next1_ = 0;
+                int next2_ = 0;
       
                 if(c1 >= 2 and c2 >= 2) {
-                    
-                    int next1_ = 0;
-                    int next2_ = 0;
-                    
                     // waapis
                     next1_ = cur * (c1 + c2 - 2) + next1;
                     next2_ = cur * (c1 + c2 - 2) + next2;
-                    
-                    int next1__ = 0;
-                    int next2__ = 0;
-                    
                     // waapis nhi aaega
-                    next1__ = cur * (c1 + c2 - 1) + next2;
-                    next2__ = cur * (c1 + c2 - 1) + next1;
-                    
-                    next1 = max(next1_, next1__);
-                    next2 = max(next2_, next2__);
-                    
-                    
+                    next1_ = max(next1_, cur * (c1 + c2 - 1) + next2);
+                    next2_ = max(next2_, cur * (c1 + c2 - 1) + next1);
                     
                 } else if(c1 >= 2){
-                    
-                    
-                    int next1_ = cur * c1 + max(next1, next2);
-                    int next2_ = max((cur * c1) + next1, cur + next2);
-                    
-                    next1 = next1_;
-                    next2 = next2_;
-                    
+                    next1_ = cur * c1 + max(next1, next2);
+                    next2_ = max((cur * c1) + next1, cur + next2);
+                
                 } else if(c2 >= 2) {
                     
-                    int next1_ = max((cur * c2) + next2, cur + next1);
-                    int next2_ = cur * c2 + max(next1, next2);
-                    
-                    next1 = next1_;
-                    next2 = next2_;
-                    
+                    next1_ = max((cur * c2) + next2, cur + next1);
+                    next2_ = cur * c2 + max(next1, next2);
                     
                 } else{
-                    
-                    int next1_ = cur + max(next1, next2);
-                    int next2_ = cur + max(next1, next2);
-                    
-                    next1 = next1_;
-                    next2 = next2_;
-                    
+                    next1_ = cur + max(next1, next2);
+                    next2_ = cur + max(next1, next2);
                 }
+                
+                next1 = next1_;
+                next2 = next2_;
             }
         }
         
