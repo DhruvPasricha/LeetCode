@@ -1,5 +1,5 @@
 # Geek collects the balls
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">There are two parallel roads, each containing <strong>N</strong> and <strong>M</strong> buckets, respectively. Each bucket may contain some balls. The balls in first road are given in an array <strong>a</strong> and balls in the second road in an array <strong>b</strong>.&nbsp;The buckets on both roads are kept in such a way that they are sorted according to the number of balls in them. Geek starts from the end&nbsp;of the road which has the bucket with a lower number of balls(i.e. if buckets are sorted in increasing order, then geek will start from the left side of the road).<br>
 Geek&nbsp;can change the road only at a point of intersection i.e.&nbsp;a point where&nbsp;buckets have&nbsp;the same number of balls on&nbsp;two roads. Help Geek&nbsp;collect the maximum number of balls.</span></p>
