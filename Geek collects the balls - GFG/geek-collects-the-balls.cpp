@@ -68,15 +68,15 @@ public:
                     
                     
                     int next1_ = cur * c1 + max(next1, next2);
-                    int next2_ = max(next1_, cur + next2);
+                    int next2_ = max((cur * c1) + next1, cur + next2);
                     
                     next1 = next1_;
                     next2 = next2_;
                     
                 } else if(c2 >= 2) {
                     
+                    int next1_ = max((cur * c2) + next2, cur + next1);
                     int next2_ = cur * c2 + max(next1, next2);
-                    int next1_ = max(next2_, cur + next1);
                     
                     next1 = next1_;
                     next2 = next2_;
