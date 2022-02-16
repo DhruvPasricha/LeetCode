@@ -12,17 +12,31 @@ class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
         
-        if(head == NULL or head -> next == NULL)
-            return head;
+        // inserting dummy head node         
+        ListNode* dummyHead = new ListNode(-1);
+        dummyHead -> next = head;
         
-        auto third = swapPairs(head -> next -> next);
+        ListNode* prevNode = dummyHead;
+        ListNode* firstNode = head;
         
-        auto first = head -> next;
-        auto second = head;
+        while(firstNode and firstNode -> next) {
+            
+            // storing secondNode
+            auto secondNode = firstNode -> next;
+            
+            // updating links             
+            prevNode -> next = secondNode;
+            firstNode -> next = secondNode -> next;
+            secondNode -> next = firstNode;
+            
+            // updating for next iteration            
+            prevNode = firstNode;
+            firstNode = firstNode -> next;
+        }
         
-        first -> next = second;
-        second -> next = third;
+        head = dummyHead -> next;
         
-        return first;
+        return head;
+                
     }
 };
