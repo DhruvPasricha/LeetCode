@@ -1,18 +1,11 @@
 class Solution {
     
-    int getMSB(int x) {
-        
-        for(int i = 30;i >= 0;i--) {
-            if((1 << i) & x) 
-                return 1 << i;
-        }
-        
-        return 0;
-        
+    int getMSB(int64_t x) {
+        for(int i = 0;i < 5;i++) x |= (x >> (1 << i));
+        x += 1;
+        return x >> 1;
     }
-    
-    
-    
+
 public:
     int rangeBitwiseAnd(int left, int right) {
         
