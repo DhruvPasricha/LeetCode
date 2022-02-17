@@ -32,7 +32,13 @@ public:
         
         sort(candidates.begin(), candidates.end());
         
-        memset(dp, -1, sizeof(dp));
+        int n = candidates.size();
+        
+        for(int i = 0;i <= n;i++) {
+            for(int j = 0;j <= target;j++) {
+                dp[i][j] = -1;
+            }
+        }
         
         solve(candidates, 0, target);
         
