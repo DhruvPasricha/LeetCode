@@ -5,43 +5,31 @@ class Solution {
     
     bool solve(vector<int> &A, int pos, int target) {
         
-        if(target < 0) 
-            return false;
-        
         if(pos == A.size()) {
-            if(target == 0) {
-                Ans.push_back(current);            
-            }
+            if(target == 0) Ans.push_back(current);           
             return target == 0;
         }
         
         if(dp[pos][target] == 0)
             return false;
     
-        bool ans1 = solve(A, pos + 1, target);
+        bool ans = solve(A, pos + 1, target);
         
-        current.push_back(A[pos]);
-        bool ans2 = solve(A, pos, target - A[pos]);
-        current.pop_back();
+        if(A[pos] <= target) {
+            current.push_back(A[pos]);
+            ans |= solve(A, pos, target - A[pos]);
+            current.pop_back();
+        }
         
-        return dp[pos][target] = ans1 | ans2;
+        return dp[pos][target] = ans;
     }
 
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         
         sort(candidates.begin(), candidates.end());
-        
-        int n = candidates.size();
-        
-        for(int i = 0;i <= n;i++) {
-            for(int j = 0;j <= target;j++) {
-                dp[i][j] = -1;
-            }
-        }
-        
+        memset(dp, -1, sizeof(dp));
         solve(candidates, 0, target);
-        
         return Ans;
     }
 };
