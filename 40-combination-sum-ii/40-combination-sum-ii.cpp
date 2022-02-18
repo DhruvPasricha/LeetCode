@@ -1,31 +1,30 @@
+
+
 class Solution {
 
     vector<vector<int>> Ans;
     vector<int> cur;
     
-    void solve(vector<int> &freq, int pos, int target) {
+    void solve(vector<int> &freq, int prev, int target) {
         
-        
-        if(pos == 51) {
-            if(target == 0) 
-                Ans.push_back(cur);
-            return;
+        if(target == 0) {
+            Ans.push_back(cur);    
         }
         
-        solve(freq, pos + 1, target);
+        int limit = min(30, target);
         
-        int count = 0;
-        
-        for(int i = 1; i <= freq[pos];i++) {
+        for(int i = prev; i <= limit;i++) {
             
-            if(target - (i * pos) < 0)
-                break;
-            cur.push_back(pos);
-            count++;
-            solve(freq, pos + 1, target - (i * pos));
+            if(freq[i] > 0) {
+                
+                freq[i]--;
+                cur.push_back(i);
+                solve(freq, i, target - i);
+                freq[i]++;
+                cur.pop_back();
+                
+            }
         }
-        
-        while(count--) cur.pop_back();
     }
     
     
@@ -37,7 +36,7 @@ public:
         for(int x : arr) 
             freq[x]++;
         
-        solve(freq, 1, target);
+        solve(freq, 0, target);
         
         return Ans;
     }
