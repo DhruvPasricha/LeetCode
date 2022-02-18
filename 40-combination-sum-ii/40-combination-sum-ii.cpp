@@ -31,10 +31,11 @@ class Solution {
 public:
     vector<vector<int>> combinationSum2(vector<int>& arr, int target) {
         
-        vector<int> freq(51, 0);
+        vector<int> freq(target + 1, 0);
         
         for(int x : arr) 
-            freq[x]++;
+            if(x <= target)
+                freq[x]++;
         
         solve(freq, 0, target);
         
