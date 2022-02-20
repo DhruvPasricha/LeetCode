@@ -1,29 +1,6 @@
 class Solution {
-    
-    
-    
-    int solveBruteForce(vector<vector<int>> &intervals) {
-        
-        int n = intervals.size();
-        
-        int coveredIntervals = 0;
-        
-        for(int i = 0; i < n; i++) {
-            
-            bool isCovered = false;
-            
-            for(int j = 0; j < n; j++)
-                isCovered |= (i != j and intervals[j][0] <= intervals[i][0] and intervals[i][1] <= intervals[j][1]);
-            
-            coveredIntervals += isCovered;
-        }
-        
-        return n - coveredIntervals;
-        
-    }
-    
-    
-    int solveOptimised(vector<vector<int>> &intervals) {
+public:
+    int removeCoveredIntervals(vector<vector<int>>& intervals) {
         
         sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b){
            
@@ -38,26 +15,15 @@ class Solution {
         int maxCoveredInRight = 0;
         int coveredIntervals = 0;
         
-        for(int i = 0; i < n; i++) {
+        for(auto &interval : intervals) {
             
-            bool isCovered = maxCoveredInRight >= intervals[i][1];
-            
-            maxCoveredInRight = max(maxCoveredInRight, intervals[i][1]);
-            
+            bool isCovered = maxCoveredInRight >= interval[1];
             coveredIntervals += isCovered;
+            maxCoveredInRight = max(maxCoveredInRight, interval[1]);
+            
         }
         
         return n - coveredIntervals;
-    }
-    
-    
-public:
-    int removeCoveredIntervals(vector<vector<int>>& intervals) {
-        
-        // int ans = solveBruteForce(intervals);
-        int ans = solveOptimised(intervals);
-        
-        return ans;
         
     }
 };
