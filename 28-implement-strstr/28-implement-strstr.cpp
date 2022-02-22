@@ -25,8 +25,9 @@ public:
         
         int patternLength = pattern.size();
         int textLength = text.size();
+        int n = LPS.size();
         
-        for(int i = patternLength + 1; i < LPS.size(); i++) {
+        for(int i = patternLength + 1; i < n; i++) {
             
             if(LPS[i] == patternLength) {
                 return i - 2 * patternLength - 1;
