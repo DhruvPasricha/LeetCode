@@ -57,7 +57,7 @@ class Solution
     vector<int> JobScheduling(Job arr[], int n) 
     { 
         
-        sort(arr, arr + n, [](Job &a, Job &b){
+        sort(arr, arr + n, [&](Job &a, Job &b){
             return a.dead < b.dead;
         });
         
