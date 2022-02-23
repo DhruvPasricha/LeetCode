@@ -21,7 +21,7 @@ public:
 
 class Solution {
     
-    map<Node*, Node*> mp; // old -> new
+    unordered_map<Node*, Node*> mp; // old -> new
     
     
     Node* dfs(Node* node) {
