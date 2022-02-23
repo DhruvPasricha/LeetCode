@@ -23,8 +23,8 @@ class Solution {
     
     map<Node*, Node*> mp; // old -> new
     
-public:
-    Node* cloneGraph(Node* node) {
+    
+    Node* dfs(Node* node) {
         
         if(node == NULL)
             return node;
@@ -37,9 +37,56 @@ public:
         mp[node] = ans;
         
         for(auto nb : node->neighbors) {
-            ans->neighbors.push_back(cloneGraph(nb));
+            ans->neighbors.push_back(dfs(nb));
         }
         
         return ans;
+        
+        
+    } 
+    
+    
+    Node* bfs(Node* node) {
+        
+        if(node == NULL)
+            return node;
+        
+        mp[node] = new Node(node -> val);
+        
+        queue<Node*> q;
+        
+        q.push(node);
+        
+        
+        while(q.size()) {
+            
+            auto f = q.front();
+            
+            q.pop();
+            
+            
+            for(auto nb : f -> neighbors) {
+                
+                if(mp.count(nb) == 0) {
+                    mp[nb] = (nb != NULL) ? new Node(nb -> val) : NULL;
+                    if(nb != NULL)
+                        q.push(nb);
+                }
+                
+                mp[f]->neighbors.push_back(mp[nb]);
+            }
+                    
+        }
+    
+        return mp[node];
+        
+    }
+    
+    
+public:
+    Node* cloneGraph(Node* node) {
+        
+        return bfs(node);
+       
     }
 };
