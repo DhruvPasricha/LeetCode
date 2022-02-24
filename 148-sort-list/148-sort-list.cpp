@@ -1,19 +1,6 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
-class Sorting{
+class MergeSort{
     
-    
-    
-    ListNode* merge(ListNode* head1, ListNode* head2) {
+    static ListNode* merge(ListNode* head1, ListNode* head2) {
         
         
         ListNode *head = new ListNode(0); // dummy head node
@@ -40,7 +27,7 @@ class Sorting{
     }
     
     
-    ListNode* getMid(ListNode* head) {
+    static ListNode* getMid(ListNode* head) {
         
         ListNode* prev = NULL;
         ListNode* slow = head, *fast = head;
@@ -54,11 +41,10 @@ class Sorting{
         return prev;
         
     } 
-    
-    
+
   public:
     
-    ListNode* mergeSort(ListNode* head) {
+    static ListNode* sort(ListNode* head) {
         
         // [length <= 1 => already sorted]
         if(head == NULL or head -> next == NULL)
@@ -73,8 +59,8 @@ class Sorting{
         mid -> next = NULL;
         
         // [sort both lists independently]
-        first = mergeSort(first);    
-        second = mergeSort(second);
+        first = sort(first);    
+        second = sort(second);
         
         // [merge two sorted halves]
         head = merge(first, second);
@@ -87,13 +73,101 @@ class Sorting{
 };
 
 
+class QuickSort{
+    
+    
+    static ListNode* merge(ListNode* first, ListNode* pivot, ListNode* second) {
+        
+        
+        ListNode* head = (first) ? first : pivot;
+        
+        while(first and first -> next)
+            first = first -> next;
+        
+        if(first)
+            first -> next = pivot;
+        
+        pivot -> next = second;
+        
+        return head;
+    }
+    
+    static pair<ListNode*, ListNode*> partition(ListNode* head) {
+        
+        ListNode* smallerHead = new ListNode(INT_MIN); // dummy node
+        ListNode* smallerTail = smallerHead;
+        
+        ListNode* greaterHead = new ListNode(INT_MAX); // dummy node
+        ListNode* greaterTail = greaterHead;
+        
+        ListNode* ptr = head -> next;
+        head -> next = NULL;
+        
+        while(ptr != NULL) {
+            
+            auto &tail = (ptr -> val <= head -> val) ? smallerTail : greaterTail;
 
+            tail -> next = ptr;
+            tail = tail -> next;
+            ptr = ptr -> next;
+            tail -> next = NULL;
+        }
+        
+        return {smallerHead -> next, greaterHead -> next};
+        
+    }
+    
+    
+    
+    static bool is_sorted(ListNode* head) {
+        
+        ListNode* prev = new ListNode(INT_MIN);
+        
+        while(head ) {
+            if(head -> val < prev -> val)
+                return false;
+            prev = head;
+            head = head -> next;
+        }
+        
+        return true;
+    }
+    
+    
+    public:
+        
+        static ListNode* sort(ListNode* head) {
+            
+            // [length <= 1 => already sorted]
+            if(is_sorted(head))
+                return head;
 
+            // [split list into three parts]
+            
+            // [first -> ... -> NULL] + [head -> NULL] + [second -> ..... -> NULL]
+            
+            // first: contains all nodes <= head -> val
+            // head: pivot node
+            // second: contains all node > head -> val
+        
+            auto [first, second] = partition(head);
+        
+            // [sort both the lists independently]
+            first = sort(first); 
+            second = sort(second);
+        
+            // [merge first + head + second]
+            head = merge(first, head, second);
+            
+            // [return the sorted list]
+            return head;
+            
+        }
+};
 
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        Sorting obj;
-        return obj.mergeSort(head);
+        return QuickSort::sort(head);
     }
 };
