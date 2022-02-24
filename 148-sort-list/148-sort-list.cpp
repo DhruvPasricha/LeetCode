@@ -73,7 +73,6 @@ class QuickSort{
         
         static ListNode* sort(ListNode* head) {
             
-            // [length <= 1 => already sorted]
             if(is_sorted(head))
                 return head;
 
