@@ -13,17 +13,3 @@ current = current -> next;
 }
 if(head1)
 tail -> next = head1;
-else if(head2)
-tail -> next = head2;
-return head -> next;
-}
-ListNode* getMid(ListNode* head) {
-ListNode* prev = NULL;
-ListNode* slow = head, *fast = head;
-while(fast and fast->next) {
-prev = slow;
-slow = slow -> next;
-fast = fast -> next -> next;
-}
-return prev;
-}
