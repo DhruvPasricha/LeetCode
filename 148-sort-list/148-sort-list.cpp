@@ -1,78 +1,3 @@
-class MergeSort{
-    
-    static ListNode* merge(ListNode* head1, ListNode* head2) {
-        
-        
-        ListNode *head = new ListNode(0); // dummy head node
-        ListNode *tail = head;
-        
-        
-        while(head1 and head2) {
-            
-            auto &current = (head1 -> val <= head2 -> val) ? head1 : head2;
-            
-            tail -> next = current;
-            tail = tail -> next;
-            current = current -> next;
-        }
-        
-        
-        if(head1)
-            tail -> next = head1;
-        else if(head2)
-            tail -> next = head2;
-        
-        
-        return head -> next;
-    }
-    
-    
-    static ListNode* getMid(ListNode* head) {
-        
-        ListNode* prev = NULL;
-        ListNode* slow = head, *fast = head;
-        
-        while(fast and fast->next) {
-            prev = slow;
-            slow = slow -> next;
-            fast = fast -> next -> next;
-        }
-        
-        return prev;
-        
-    } 
-
-  public:
-    
-    static ListNode* sort(ListNode* head) {
-        
-        // [length <= 1 => already sorted]
-        if(head == NULL or head -> next == NULL)
-            return head;
-        
-        // [divide list into two parts]
-        ListNode* mid = getMid(head);
-    
-        ListNode* first =  head; // [head......mid]
-        ListNode* second = mid -> next; // [mid->next.....tail]
-        
-        mid -> next = NULL;
-        
-        // [sort both lists independently]
-        first = sort(first);    
-        second = sort(second);
-        
-        // [merge two sorted halves]
-        head = merge(first, second);
-        
-        
-        // [return the sorted list]
-        return head;
-    }
-    
-};
-
-
 class QuickSort{
     
     
@@ -94,10 +19,10 @@ class QuickSort{
     
     static pair<ListNode*, ListNode*> partition(ListNode* head) {
         
-        ListNode* smallerHead = new ListNode(INT_MIN); // dummy node
+        ListNode* smallerHead = new ListNode(INT_MIN);
         ListNode* smallerTail = smallerHead;
         
-        ListNode* greaterHead = new ListNode(INT_MAX); // dummy node
+        ListNode* greaterHead = new ListNode(INT_MAX);
         ListNode* greaterTail = greaterHead;
         
         ListNode* ptr = head -> next;
