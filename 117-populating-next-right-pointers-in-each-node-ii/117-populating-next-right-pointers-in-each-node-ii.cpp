@@ -18,56 +18,21 @@ public:
 
 class Solution {
     
-    
-    void connect(vector<Node*> &currentLevel) {
-        
-        int n = currentLevel.size();
-        
-        for(int i = 1; i < n; i++) {
-            currentLevel[i - 1] -> next = currentLevel[i];
-        }
-    }
+    unordered_map<int, Node*> mp;
     
 public:
-    Node* connect(Node* root) {
+    Node* connect(Node* root, int level = 0) {
         
         if(root == NULL)
-            return NULL;
+            return root;
         
-        queue<Node*> q;
+        if(mp.count(level))
+            mp[level] -> next = root;
         
-        q.push(root);
-        q.push(NULL);
+        mp[level] = root;
         
-        vector<Node*> currentLevel;
-        
-        while(q.size()) {
-            
-            auto f = q.front();
-            q.pop();
-            
-            // level has ended
-            if(f == NULL) {
-                
-                connect(currentLevel);
-                currentLevel.clear();
-                
-                if(q.size()) 
-                    q.push(NULL);
-            
-            } else {
-                
-                currentLevel.push_back(f);
-                
-                if(f -> left) 
-                    q.push(f -> left);
-                
-                if(f -> right) 
-                    q.push(f -> right);
-                
-            }
-            
-        }
+        root -> left = connect(root->left, level + 1);
+        root -> right = connect(root->right, level + 1);
         
         return root;
     }
