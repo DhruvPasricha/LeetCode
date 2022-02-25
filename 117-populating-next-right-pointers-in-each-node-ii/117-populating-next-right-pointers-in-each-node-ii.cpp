@@ -18,21 +18,47 @@ public:
 
 class Solution {
     
-    unordered_map<int, Node*> mp;
-    
 public:
-    Node* connect(Node* root, int level = 0) {
+    Node* connect(Node* root) {
         
         if(root == NULL)
-            return root;
+            return NULL;
         
-        if(mp.count(level))
-            mp[level] -> next = root;
+        queue<Node*> q;
         
-        mp[level] = root;
+        q.push(root);
+        q.push(NULL);
         
-        root -> left = connect(root->left, level + 1);
-        root -> right = connect(root->right, level + 1);
+        Node* prev = NULL;
+        
+        while(q.size()) {
+            
+            auto f = q.front();
+            q.pop();
+            
+            if(prev != NULL)
+                prev -> next = f;
+            
+            prev = f;
+            
+            // level has ended
+            if(f == NULL) {
+                
+                if(q.size()) 
+                    
+                    q.push(NULL);
+            
+            } else {
+                
+                if(f -> left) 
+                    q.push(f -> left);
+                
+                if(f -> right) 
+                    q.push(f -> right);
+                
+            }
+            
+        }
         
         return root;
     }
