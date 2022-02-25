@@ -53,7 +53,7 @@ public:
             dsu.join(u, v);
         }
         
-        map<int, set<int>> mp;
+        unordered_map<int, set<int>> mp;
         
         for(int i = 0;i < n; i++)
             mp[dsu.getParent(i)].insert(i);
@@ -61,16 +61,17 @@ public:
         
         for(auto &group : mp) {
             
-            priority_queue<char, vector<char>, greater<char>> pq;
+            map<char, int> freq;
                 
-            for(auto &it : group.second) {
-                pq.push(s[it]);
-            }
-            
+            for(auto &it : group.second)
+                freq[s[it]]++;
             
             for(auto &it : group.second) {
-                s[it] = pq.top();
-                pq.pop();
+                char smallest = freq.begin()->first;
+                s[it] = smallest;
+                freq[smallest]--;
+                if(freq[smallest] == 0)
+                    freq.erase(smallest);
             }
             
         }
