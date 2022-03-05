@@ -6,16 +6,16 @@ class Solution {
         
     int solve(int pos) {
         
-        if(pos == arr.size())
-            return 0;
+        if(pos == arr.size()) return 0;
         
         int &ans = dp[pos];
         
-        if(ans != -1)
-            return dp[pos];
+        if(ans != -1) return dp[pos];
         
+        // not deleting this element
         int ans1 = solve(pos + 1);
         
+        // deleting this element
         int nextPos = pos + 1;
         
         if(pos + 1 < arr.size() and arr[pos + 1].first == arr[pos].first + 1)
@@ -23,7 +23,7 @@ class Solution {
         
         int ans2 = arr[pos].first * arr[pos].second + solve(nextPos);
         
-        
+        // choosing the best answer
         return ans = max(ans1, ans2);
         
     }
