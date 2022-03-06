@@ -92,34 +92,17 @@ public:
             }
         }
         
-        int n = nums.size();
-        
-        map<int, multiset<int>> elements;
-        map<int, set<int>> indices;
-        
-        for(int i = 0;i < n;i++) {
-            int group = dsu.get(nums[i]); 
-            elements[group].insert(nums[i]);
-            indices[group].insert(i);
-        }
-        
-        for(auto &itr : elements) {
-            
-            int group = itr.first;
-            
-            auto idx = indices[group].begin();
-            for(auto e : itr.second) {
-                nums[*idx] = e;
-                idx++;
-            }
-        }
-        
         vector<int> temp = nums;
-        
-        
         sort(temp.begin(), temp.end());
         
-        return nums == temp;
+        
+        int n = nums.size();
+        
+        for(int i = 0;i < n;i++)
+            if(dsu.get(nums[i]) != dsu.get(temp[i]))
+                return false;
+        
+        return true;
         
     }
 };
