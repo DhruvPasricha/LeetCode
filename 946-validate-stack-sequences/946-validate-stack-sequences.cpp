@@ -7,19 +7,17 @@ public:
         int i = 0;
         int j = 0;
         
-        stack<int> st;
-        st.push(INT_MIN);
         
-        while(j < n) {
+        stack<int> st;
+        
+        while(i < n or j < n) {
             
-            while(i < n and st.top() != popped[j])
+            if(i < n and (st.empty() or st.top() != popped[j]))
                 st.push(pushed[i++]);
-            
-            if(st.top() != popped[j])
+            else if(st.top() == popped[j])
+                j++, st.pop();
+            else
                 return false;
-            
-            st.pop();
-            j++;
         }
         
         return true;
