@@ -6,8 +6,8 @@ public:
         
         for(auto &edge : edges) {
             
-            auto u = edge[0];
-            auto v = edge[1];
+            int u = edge[0];
+            int v = edge[1];
             
             if(visited.count(u)) return u;
             if(visited.count(v)) return v;
