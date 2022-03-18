@@ -2,7 +2,7 @@ class Solution {
 public:
     int findCenter(vector<vector<int>>& edges) {
         
-        unordered_set<int> visited;
+        set<int> visited;
         
         for(auto &edge : edges) {
             
