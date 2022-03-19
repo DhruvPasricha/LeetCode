@@ -3,15 +3,15 @@ class Solution {
 public:
     bool isSymmetric(TreeNode* root) {   
         
-        stack<pair<TreeNode*, TreeNode*>> st;
-        st.push({root->left, root->right});
+        queue<pair<TreeNode*, TreeNode*>> q;
+        q.push({root->left, root->right});
         
         
-        while(!st.empty()) {
+        while(!q.empty()) {
             
-            auto [root1, root2] = st.top();
+            auto [root1, root2] = q.front();
             
-            st.pop();
+            q.pop();
             
             if(root1 == NULL and root2 == NULL)
                 continue;
@@ -22,8 +22,8 @@ public:
             if(root1 -> val != root2 -> val)
                 return false;
             
-            st.push({root1->right, root2->left});
-            st.push({root1->left, root2->right});
+            q.push({root1->right, root2->left});
+            q.push({root1->left, root2->right});
             
         }
         
