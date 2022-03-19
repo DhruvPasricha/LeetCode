@@ -3,26 +3,25 @@ public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
         
         
-        vector<int> merged(m + n);
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
         
-        int i = 0;
-        int j = 0;
-        
-        while(i < m or j < n) {
+        while(k >= 0) {
             
-            int option1 = (i < m) ? nums1[i] : INT_MAX;
-            int option2 = (j < n) ? nums2[j] : INT_MAX;
+            int option1 = (i >= 0) ? nums1[i] : INT_MIN;
+            int option2 = (j >= 0) ? nums2[j] : INT_MIN;
             
-            if(option1 <= option2) {
-                merged[i + j] = option1;
-                i++;
+            if(option1 >= option2) {
+                nums1[k] = option1;
+                i--;
             }
             else {
-                merged[i + j] = option2;
-                j++;
+                nums1[k] = option2;
+                j--;
             }
+            
+            k--;
         }
-        
-        nums1 = merged;
     }
 };
