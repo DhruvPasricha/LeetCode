@@ -74,6 +74,9 @@ int prims(vector<pii> Adj[], int n)
 
         for (auto &it : Adj[v])
         {
+            if(visited[it.first])
+                continue;
+            
             edge e(v, it.first, it.second);
             st.insert(e);
         }
