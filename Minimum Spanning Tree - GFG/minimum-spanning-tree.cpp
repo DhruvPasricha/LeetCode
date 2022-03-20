@@ -31,7 +31,13 @@ struct edge
 
 bool operator<(edge a, edge b)
 {
-    return a.wt < b.wt;
+    if(a.wt != b.wt)
+        return a.wt < b.wt;
+    
+    if(a.u != b.u)
+        return a.u < b.u;
+        
+    return a.v < b.v;
 }
 
 int prims(vector<pii> Adj[], int n)
@@ -42,7 +48,7 @@ int prims(vector<pii> Adj[], int n)
 
     visited[0] = true;
 
-    multiset<edge> st;
+    set<edge> st;
 
     for (auto &it : Adj[0])
     {
