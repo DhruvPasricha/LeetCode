@@ -2,12 +2,12 @@ class Solution {
 public:
     int numRescueBoats(vector<int>& people, int limit) {
         
-        map<int, int> mp;
+        multiset<int> st;
         
         int n = people.size();
         
         for(int i = 0; i < n; i++)
-            mp[people[i]]++;
+            st.insert(people[i]);
         
         sort(people.begin(), people.end());
         
@@ -15,23 +15,18 @@ public:
         
         for(int i = 0; i < n; i++) {
             
-            if(mp.count(people[i]) == 0) continue;
+            if(st.count(people[i]) == 0) continue;
             
             ans++;
             
-            mp[people[i]]--;
+            auto itr = st.find(people[i]);
+            st.erase(itr);
             
-            if(mp[people[i]] == 0) mp.erase(people[i]);
-            
-            auto itr = mp.upper_bound(limit - people[i]);
+            itr = st.upper_bound(limit - people[i]);
              
-            if(itr != mp.begin()) {
-                
+            if(itr != st.begin()) {
                 itr--;
-                itr->second--;
-                
-                if(itr -> second == 0)
-                    mp.erase(itr);
+                st.erase(itr);
             }
         }
         
