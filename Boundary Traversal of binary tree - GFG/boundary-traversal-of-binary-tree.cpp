@@ -155,6 +155,7 @@ public:
         reverse(right.begin(),right.end());
         
         ans.insert(ans.end(),right.begin(),right.end());
+        
         return ans;
     }
 };
