@@ -104,7 +104,7 @@ struct Node
 }; */
 class Solution {
     bool isLeaf(Node*root){
-        return root && root->left == NULL && root->right == NULL;
+        return root->left == NULL && root->right == NULL;
     }
     
     void addLeft(Node*root,vector<int>&ans){
@@ -141,8 +141,10 @@ public:
     vector <int> boundary(Node *root)
     {
         vector<int>ans,right;
+        
         if(root==NULL)
             return ans;
+        
         if(!isLeaf(root))
             ans.push_back(root->data);
             
