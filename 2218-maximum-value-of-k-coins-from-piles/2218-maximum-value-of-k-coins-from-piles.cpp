@@ -2,28 +2,27 @@ class Solution {
     
     int dp[1001][2001];
     
-    int solve(vector<vector<int>> &piles, int pos, int k) {
+    int solve(vector<vector<int>> &piles, int n, int k) {
         
-        if(pos == piles.size() or k == 0)
+        if(n == 0 or k == 0)
             return 0;
         
-        
-        int &ans = dp[pos][k];
+        int &ans = dp[n][k];
         
         if(ans != -1)
             return ans;
         
         ans = 0;
         
-        int n = piles[pos].size();
+        int m = piles[n - 1].size();
         
         int sum = 0;
         
-        for(int i = 0; i <= n and i <= k; i++) {
+        for(int i = 0; i <= m and i <= k; i++) {
             
-            int cur = sum + solve(piles, pos + 1, k - i);
+            int cur = sum + solve(piles, n - 1, k - i);
             
-            if(i < n) sum += piles[pos][i];
+            if(i < m) sum += piles[n - 1][i];
             
             ans = max(ans, cur);
         }
@@ -40,6 +39,6 @@ public:
         
         memset(dp, -1, sizeof(dp));
         
-        return solve(piles, 0, k);
+        return solve(piles, piles.size(), k);
     }
 };
