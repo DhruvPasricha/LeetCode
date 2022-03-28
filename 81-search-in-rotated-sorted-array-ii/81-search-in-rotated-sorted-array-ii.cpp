@@ -10,7 +10,7 @@ public:
             
             int m = (l + r) / 2;
             
-            if(nums[m] == target or nums[l] == target)
+            if(nums[m] == target or nums[l] == target or nums[r] == target)
                 return true;
             
             if(A[l] < A[m]) {
@@ -18,18 +18,18 @@ public:
                 if(target > A[m])
                     l = m + 1;
                 else
-                    l++;
+                    l++, r--;
                 
             } else if(A[l] > A[m]) {
                 
                 if(target < A[m])
                     r = m - 1;
                 else
-                    l++;
+                    l++, r--;
                 
             } else {
                 
-                l++;
+                l++, r--;
             }
     
         }
