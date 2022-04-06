@@ -5,21 +5,20 @@ public:
         int n = nums.size();
         int ans = n + 1;
         
-        queue<int> q;
         int64_t sum = 0;
+        int j = 0;
         
         for(int i = 0; i < n; i++) {
             
-            q.push(nums[i]);
             sum += (int64_t)nums[i];
             
-            while(q.size() and sum - q.front() >= target) {
-                sum -= q.front();
-                q.pop();
+            while(j <= i and sum - nums[j] >= target) {
+                sum -= nums[j];
+                j++;
             }
             
             if(sum >= target)
-                ans = min(ans, (int)q.size());
+                ans = min(ans, i - j + 1);
         }
         
         return ans % (n + 1);
