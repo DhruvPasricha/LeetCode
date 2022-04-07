@@ -1,7 +1,7 @@
 class Solution {
     
     const int64_t mod = 1e9 + 7;
-    map<int,int> mp;
+    unordered_map<int,int> mp;
     
     int64_t twoSum(int target) {
         
