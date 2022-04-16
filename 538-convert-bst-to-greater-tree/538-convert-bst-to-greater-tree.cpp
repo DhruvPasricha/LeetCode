@@ -16,12 +16,15 @@ class Solution {
 public:
     TreeNode* convertBST(TreeNode* root) {
         
-        if(root == NULL) return root;
+        if(root == NULL) 
+            return root;
         
-        convertBST(root->right);
-        root->val += sumOfGreaterElements;
+        root -> right = convertBST(root->right);
+        
+        root -> val += sumOfGreaterElements;
         sumOfGreaterElements = root->val;
-        convertBST(root->left);
+        
+        root -> left = convertBST(root->left);
         
         return root;
     }
