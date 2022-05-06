@@ -2,24 +2,23 @@ class Solution {
 public:
     int maxEnvelopes(vector<vector<int>>& envelopes) {
         
-        sort(envelopes.begin(), envelopes.end());
+        sort(envelopes.begin(), envelopes.end(), [&](vector<int> &A, vector<int> &B){
+            
+            if(A[0] != B[0])
+                return A[0] < B[0];
+            
+            return A[1] > B[1];
+            
+        });
         
         int n = envelopes.size();
         
         vector<int> dp(n + 1, INT_MAX);
         dp[0] = INT_MIN;
         
-        int i = 0;
-        while(i < n) {
-            int j = i;
-            while(i < n and envelopes[i][0] == envelopes[j][0]) {
-                i++;
-            }
-            
-            for(int k = i - 1; k >= j; k--) {
-                auto itr = lower_bound(dp.begin(), dp.end(), envelopes[k][1]);
-                *itr = envelopes[k][1];
-            }
+        for(int i = 0;i < n;i++){
+            auto itr = lower_bound(dp.begin(), dp.end(), envelopes[i][1]);
+            *itr = envelopes[i][1];
         }
             
         for(int i = n; i >= 0; i--)
